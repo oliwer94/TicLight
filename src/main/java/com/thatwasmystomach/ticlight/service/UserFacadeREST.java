@@ -25,7 +25,7 @@ import javax.ws.rs.core.MediaType;
  * @author Johannes
  */
 @Stateless
-@Path("com.thatwasmystomach.ticlight.user")
+@Path("user")
 public class UserFacadeREST extends AbstractFacade<User>
 {
 

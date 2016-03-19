@@ -25,7 +25,7 @@ import javax.ws.rs.core.MediaType;
  * @author Johannes
  */
 @Stateless
-@Path("com.thatwasmystomach.ticlight.game")
+@Path("game")
 public class GameFacadeREST extends AbstractFacade<Game>
 {
 
