@@ -114,13 +114,29 @@ public class UserFacadeREST extends AbstractFacade<User>
     @GET
     @Path("topusers{range}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<User> bestplayer2(@PathParam("range") Integer range) {
+    public List<User> topPlayers(@PathParam("range") Integer range) {
         List<User> u = null;
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<User> q = cb.createQuery(User.class);
         Root<User> c = q.from(User.class);
         q.select(c);
         q.orderBy(cb.desc(c.get("elo")));
+        u = (List<User>) em.createQuery(q).
+                setMaxResults(range).
+                getResultList();
+        return u;
+    }
+    
+    @GET
+    @Path("bottomusers{range}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<User> bottomPlayers(@PathParam("range") Integer range) {
+        List<User> u = null;
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<User> q = cb.createQuery(User.class);
+        Root<User> c = q.from(User.class);
+        q.select(c);
+        q.orderBy(cb.asc(c.get("elo")));
         u = (List<User>) em.createQuery(q).
                 setMaxResults(range).
                 getResultList();
